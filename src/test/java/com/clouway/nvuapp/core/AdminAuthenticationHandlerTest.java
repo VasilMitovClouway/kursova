@@ -1,8 +1,7 @@
 package com.clouway.nvuapp.core;
 
 import com.google.common.collect.ImmutableMap;
-import core.*;
-import http.controllers.AdminAuthenticationHandler;
+import com.clouway.nvuapp.adapter.http.controllers.AdminAuthenticationHandler;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Test;
@@ -12,8 +11,8 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Optional;
 
-import static core.CustomMatchers.isRedirectingTo;
-import static core.CustomMatchers.isStatusEqualTo;
+import static com.clouway.nvuapp.core.CustomMatchers.isRedirectingTo;
+import static com.clouway.nvuapp.core.CustomMatchers.isStatusEqualTo;
 import static org.junit.Assert.assertThat;
 
 public class AdminAuthenticationHandlerTest {

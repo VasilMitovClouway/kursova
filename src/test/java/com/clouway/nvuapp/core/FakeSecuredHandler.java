@@ -1,10 +1,5 @@
 package com.clouway.nvuapp.core;
 
-import core.Request;
-import core.Response;
-import core.SecuredHandler;
-import core.Tutor;
-
 import javax.servlet.http.Cookie;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

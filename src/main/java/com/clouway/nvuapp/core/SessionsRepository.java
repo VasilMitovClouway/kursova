@@ -1,8 +1,5 @@
 package com.clouway.nvuapp.core;
 
-import core.Tutor;
-import core.TutorSession;
-
 import java.time.LocalDateTime;
 
 import java.util.Optional;

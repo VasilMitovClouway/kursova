@@ -1,9 +1,6 @@
 package com.clouway.nvuapp.core;
 
-import core.Request;
-import core.Response;
-import core.Tutor;
-import http.controllers.TutorHandler;
+import com.clouway.nvuapp.adapter.http.controllers.TutorHandler;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Test;
@@ -11,7 +8,7 @@ import org.junit.Test;
 import java.util.LinkedList;
 import java.util.List;
 
-import static core.ResponseReader.reader;
+import static com.clouway.nvuapp.core.ResponseReader.reader;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 

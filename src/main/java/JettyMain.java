@@ -1,20 +1,17 @@
-import com.clouway.nvuapp.adapter.PersistentQuestionRepository;
-import com.clouway.nvuapp.adapter.PersistentQuestionnaireRepository;
+import com.clouway.nvuapp.adapter.http.controllers.*;
+import com.clouway.nvuapp.adapter.http.servlet.PageHandlerServlet;
+import com.clouway.nvuapp.adapter.http.servlet.ResourceServlet;
+import com.clouway.nvuapp.adapter.http.servlet.ServerPageRegistry;
+import com.clouway.nvuapp.adapter.persistence.*;
+import com.clouway.nvuapp.adapter.persistence.dao.DataStore;
+import com.clouway.nvuapp.core.PageHandler;
+import com.clouway.nvuapp.core.PageRegistry;
+import com.clouway.nvuapp.core.SessionCleanerThread;
 import com.clouway.nvuapp.core.SessionsRepository;
+import com.clouway.nvuapp.core.TutorRepository;
 import com.google.common.collect.ImmutableMap;
-import core.SessionCleanerThread;
-import core.PageHandler;
-import core.PageRegistry;
-import http.controllers.*;
-import http.servlet.PageHandlerServlet;
-import http.servlet.ResourceServlet;
-import http.servlet.ServerPageRegistry;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
-import persistent.adapter.ConnectionProvider;
-import persistent.adapter.PersistentSessionRepository;
-import persistent.adapter.PersistentTutorRepository;
-import persistent.dao.DataStore;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -26,19 +23,21 @@ import javax.servlet.ServletContextListener;
 public class JettyMain {
   public static void main(String[] args) {
     final DataStore dataStore = new DataStore(new ConnectionProvider());
-    final PersistentQuestionnaireRepository questionnaireRepository=new PersistentQuestionnaireRepository(dataStore);
-    final PersistentQuestionRepository questionRepository=new PersistentQuestionRepository(dataStore);
+    final TutorRepository tutorRepository=new PersistentTutorRepository(dataStore);
+    final PersistentQuestionnaireRepository questionnaireRepository = new PersistentQuestionnaireRepository(dataStore);
+    final PersistentQuestionRepository questionRepository = new PersistentQuestionRepository(dataStore);
     final SessionsRepository sessions = new PersistentSessionRepository(dataStore, 60);
     final SessionCleanerThread sessionCleaner = new SessionCleanerThread(sessions);
     final PageRegistry registry = new ServerPageRegistry(
             ImmutableMap.<String, PageHandler>builder()
                     .put("/", new AuthenticatedHandler(sessions, new HomeHandler()))
                     .put("/adminHome", new AdminAuthenticationHandler(sessions, new AdminHomePageHandler()))
-                    .put("/questions", new AuthenticatedHandler(sessions, new QuestionListHandler(new PersistentQuestionRepository(dataStore))))
-                    .put("/registerquestion", new AuthenticatedHandler(sessions, new RegisterQuestionHandler(new PersistentQuestionRepository(dataStore))))
-                    .put("/adminHome/registerquestion", new AdminAuthenticationHandler(sessions, new RegisterQuestionHandler(new PersistentQuestionRepository(dataStore))))
-                    .put("/adminHome/adminQuestions", new AdminAuthenticationHandler(sessions, new AdminQuestionListHandler(new PersistentQuestionRepository(dataStore))))
-                    .put("/registration", new TutorHandler(new PersistentTutorRepository(dataStore)))
+                    .put("/questions", new AuthenticatedHandler(sessions, new QuestionListHandler(questionRepository)))
+                    .put("/adminHome/questions", new AdminAuthenticationHandler(sessions, new QuestionListHandler(questionRepository)))
+                    .put("/registerquestion", new AuthenticatedHandler(sessions, new RegisterQuestionHandler(questionRepository)))
+                    .put("/adminHome/registerquestion", new AdminAuthenticationHandler(sessions, new RegisterQuestionHandler(questionRepository)))
+                    .put("/adminHome/adminQuestions", new AdminAuthenticationHandler(sessions, new AdminQuestionListHandler(questionRepository,tutorRepository)))
+                    .put("/registration", new TutorHandler(tutorRepository))
                     .put("/adminHome/questionnaire", new AdminAuthenticationHandler(sessions, new RegisterQuestionnaireHandler(questionRepository, questionnaireRepository)))
                     .put("/adminHome/new-questionnaire", new AdminAuthenticationHandler(sessions, new ShowRegisterQuestionnaireHandler(questionnaireRepository)))
                     .put("/login", new LoginHandler(sessions, new PersistentTutorRepository(dataStore)))

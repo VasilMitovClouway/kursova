@@ -1,7 +1,6 @@
 package com.clouway.nvuapp.core;
 
 import com.google.common.base.Optional;
-import core.Question;
 
 import java.util.List;
 

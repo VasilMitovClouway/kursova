@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/assets/questionList.css">
+    <meta charset="UTF-8">
+    <title>View Question List</title>
+</head>
+<body>
+<p>Всички въпроси са:</p><br>
+<form action="/adminHome/adminQuestions" method="post">
+<#include "/adminQuestionFilter.ftl">
+    <input type="submit" onclick="submit" value="Филтрирай">
+</form>
+    <#list questionList as question>
+                <table class="table">
+                    <tr><th>Преподавател:${question.tutorId}<br>
+                    <tr><th>${question.question}<br>
+                    Детайли: Категория: ${question.category} , Модул: ${question.module} ,
+                    Подмодул: ${question.subModule} , Тема: ${question.theme} , Трудност: ${question.difficulty}</th></tr>
+                    <tr><td>A) ${question.answerA}</td></tr>
+                    <tr><td>B) ${question.answerB}</td></tr>
+                    <tr><td>C) ${question.answerC}</td></tr>
+                </table><br>
+        <#else>
+            <p>Няма регистрирани въпроси до момента</p>
+    </#list>
+</body>
+</html>

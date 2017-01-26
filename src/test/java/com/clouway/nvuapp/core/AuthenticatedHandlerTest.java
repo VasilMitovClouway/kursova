@@ -1,8 +1,7 @@
 package com.clouway.nvuapp.core;
 
-import core.*;
-import http.controllers.AuthenticatedHandler;
-import http.controllers.HomeHandler;
+import com.clouway.nvuapp.adapter.http.controllers.AuthenticatedHandler;
+import com.clouway.nvuapp.adapter.http.controllers.HomeHandler;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Test;
@@ -11,8 +10,8 @@ import javax.servlet.http.Cookie;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static core.CustomMatchers.isRedirectingTo;
-import static core.CustomMatchers.isStatusEqualTo;
+import static com.clouway.nvuapp.core.CustomMatchers.isRedirectingTo;
+import static com.clouway.nvuapp.core.CustomMatchers.isStatusEqualTo;
 import static org.junit.Assert.assertThat;
 
 public class AuthenticatedHandlerTest {

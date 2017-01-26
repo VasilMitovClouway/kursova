@@ -1,19 +1,16 @@
 package com.clouway.nvuapp.core;
 
-import com.clouway.nvuapp.adapter.TableManager;
-import core.Calendar;
-import core.Tutor;
-import core.TutorSession;
+import com.clouway.nvuapp.adapter.persistence.TableManager;
 import org.junit.Before;
 import org.junit.Test;
-import persistent.adapter.ConnectionProvider;
-import persistent.adapter.PersistentSessionRepository;
-import persistent.dao.DataStore;
+import com.clouway.nvuapp.adapter.persistence.ConnectionProvider;
+import com.clouway.nvuapp.adapter.persistence.PersistentSessionRepository;
+import com.clouway.nvuapp.adapter.persistence.dao.DataStore;
 
 import java.util.Optional;
 
-import static core.CustomMatchers.isNotPresent;
-import static core.CustomMatchers.isPresent;
+import static com.clouway.nvuapp.core.CustomMatchers.isNotPresent;
+import static com.clouway.nvuapp.core.CustomMatchers.isPresent;
 import static org.junit.Assert.assertThat;
 
 public class SessionRepositoryTest {

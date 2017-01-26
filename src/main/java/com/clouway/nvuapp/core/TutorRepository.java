@@ -1,7 +1,5 @@
 package com.clouway.nvuapp.core;
 
-import core.Tutor;
-
 import java.util.List;
 
 /**
@@ -11,4 +9,6 @@ public interface TutorRepository {
   void register(Tutor tutor);
 
   List<Tutor> findTutor(String id);
+
+  List<Tutor> allTutors();
 }

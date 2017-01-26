@@ -1,23 +1,20 @@
 package com.clouway.nvuapp.core;
 
-import com.clouway.nvuapp.adapter.TableManager;
-import core.Calendar;
-import core.Request;
-import core.Tutor;
-import http.controllers.LogoutHandler;
+import com.clouway.nvuapp.adapter.persistence.TableManager;
+import com.clouway.nvuapp.adapter.http.controllers.LogoutHandler;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
 import org.junit.Test;
-import persistent.adapter.ConnectionProvider;
-import persistent.adapter.PersistentSessionRepository;
-import persistent.dao.DataStore;
+import com.clouway.nvuapp.adapter.persistence.ConnectionProvider;
+import com.clouway.nvuapp.adapter.persistence.PersistentSessionRepository;
+import com.clouway.nvuapp.adapter.persistence.dao.DataStore;
 
 import javax.servlet.http.Cookie;
 import java.util.Optional;
 
-import static core.CustomMatchers.isDead;
-import static core.CustomMatchers.isNotPresent;
+import static com.clouway.nvuapp.core.CustomMatchers.isDead;
+import static com.clouway.nvuapp.core.CustomMatchers.isNotPresent;
 import static org.junit.Assert.assertThat;
 
 public class LogoutHandlerTest {

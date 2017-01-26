@@ -1,21 +1,19 @@
 package com.clouway.nvuapp.core;
 
-import core.Response;
-import core.Tutor;
-import http.controllers.LoginHandler;
-import loadquestionlisttest.FakeRequest;
+import com.clouway.nvuapp.adapter.http.controllers.LoginHandler;
+import com.clouway.nvuapp.FakeRequest;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Test;
-import persistent.adapter.ConnectionProvider;
-import persistent.adapter.PersistentSessionRepository;
-import persistent.dao.DataStore;
+import com.clouway.nvuapp.adapter.persistence.ConnectionProvider;
+import com.clouway.nvuapp.adapter.persistence.PersistentSessionRepository;
+import com.clouway.nvuapp.adapter.persistence.dao.DataStore;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import static core.ResponseReader.reader;
+import static com.clouway.nvuapp.core.ResponseReader.reader;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
